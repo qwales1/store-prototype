@@ -12,17 +12,19 @@ var Store = function() {
 		});
 	},
 	this.addChangeListener = function(name, fn) {
-		if (arguments.length === 1) {
-			fn = name;
-			name = null;
-		}
-		if (name) {
-			if (!_eventListeners[name]) {
-				_eventListeners[name] = [];
+		if(typeof window !== 'undefined'){
+			if (arguments.length === 1) {
+				fn = name;
+				name = null;
 			}
-			_eventListeners[name].push(fn);
-		} else {
-			_changeListeners.push(fn);
+			if (name) {
+				if (!_eventListeners[name]) {
+					_eventListeners[name] = [];
+				}
+				_eventListeners[name].push(fn);
+			} else {
+				_changeListeners.push(fn);
+			}
 		}
 	},
 	this.removeChangeListener = function(name, fn) {
